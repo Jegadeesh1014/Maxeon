@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="Style/style.css">
+</head>
+<body>
+<!-- Header -->
+<section id="header">
+  <div class="header container">
+    <div class="nav-bar">
+      <div class="brand"> <a href="#hero">
+        <h1>Maxeon</h1>
+        </a> </div>
+      <div class="nav-list">
+        <div class="hamburger">
+          <div class="bar"></div>
+        </div>
+        <ul>
+          <li><a href="Products">Products</a></li>
+          <li><a href="Features">Features</a></li>
+          <li><a href="Usecases">Usecases</a></li>
+          <li><a href="pricing">Pricing</a></li>
+          <li>
+          <a href="Login">
+          <li class="active">Login</li>
+          </li>
+          </a>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Header --> 
+
+<!-- Hero Section  -->
+<section id="hero">
+  <div class="hero container">
+    <div>
+      <h1>Where <span></span></h1>
+      <h1>Words <span></span></h1>
+      <h1>fails, <span></span></h1>
+      <h1>Music <span></span></h1>
+      <h1>speaks. <span></span></h1>
+    </div>
+  </div>
+  <div class="chat-icn"><img src="Images/icon.png" class="chat-icn-img"><span class="chat-close-icn">X</span></div>
+</section>
+<!-- End Hero Section  --> 
+<!-- chat popup -->
+<div class="chat-popup-main" style="display: none;">
+  <div class="chat-popup">
+    <div class="chat-popup-header">
+      <div class="chat-popup-header-sec">
+        <h3>Hi There</h3>
+        <p class="chat-st-msg">Hello Ask Us Anything, Share Your Feedback.</p>
+        <p class="main-msg">The team typically replies in a few minutes.</p>
+      </div>
+    </div>
+    <div class="chat-popup-body">
+      <div class="chat-start-div">
+        <h4>Start a Conversation</h4>
+        <p>The team typically replies in a few minutes.</p>
+        <span class="chat-btn">New Conversation</span> </div>
+      <div class="chat-msg-div">
+      </div>
+    </div>
+    <div class="chat-popup-footer">
+      <p class="ele-shw">we run on surveysparrow</p>
+      <div class="msg-ele">
+        <input type="text" placeholder="write a reply..." class="chat-msg">
+      </div>
+      <div class="send-icn"></div>
+    </div>
+  </div>
+</div>
+<script src="./app.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+<script>
+$('.chat-btn').click(function(){
+	$('.chat-st-msg,.chat-start-div').fadeOut(0);
+	$('.main-msg').fadeIn(100)
+	$('.chat-msg-div,.chat-popup-footer').fadeIn(400);
+	$('.ele-shw').addClass('show-ele');
+});
+$('.chat-icn').click(function(){
+	if($('.chat-icn').hasClass('show-ele')){
+		$('.chat-popup-main').slideUp();
+		$('.chat-icn').removeClass('show-ele');
+		$('.chat-close-icn').fadeOut(0);
+		$('.chat-icn-img').fadeIn(200);
+	}else{
+		$('.chat-popup-main').slideDown();
+		$('.chat-icn').addClass('show-ele');
+		$('.chat-icn-img').fadeOut(0);
+		$('.chat-close-icn').fadeIn(200);
+	}
+	$('.chat-st-msg,.chat-start-div').fadeIn(200);
+	$('.main-msg').fadeOut(0)
+	$('.chat-msg-div,.chat-popup-footer').fadeOut(0);
+	$('.ele-shw').removeClass('show-ele');
+});
+$('.send-icn').click(function(){
+	if($('.chat-msg').val()!=''){
+		$('.chat-msg-div').append('<div class="msg-main-box"><div class="msg-box user-msg"><p>'+$('.chat-msg').val()+'</div></div>');
+		$('.chat-msg').val('');
+		$.ajax ({
+        	url: 'https://api.adviceslip.com/advice',
+        	datatype: "json",
+        	success: function (data) {
+				var res = $.parseJSON(data);
+				$('.chat-msg-div').append('<div class="msg-box"><p>'+res["slip"].advice+'</p></div>');
+        	}
+		});
+	}
+});
+$('.chat-msg').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        $('.send-icn').trigger("click");
+    }
+});
+</script>
+</body>
+</html>
