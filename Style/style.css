@@ -445,16 +445,15 @@ p {
 	z-index: 1;
     cursor: pointer;
 	display: block;
-    width: 30px;
-    height: 35px;
+    width: 60px;
+    height: 60px;
     background-color: #fff;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    transform: rotate(130deg);
+    border-radius: 50%;
 }
 .chat-popup-main{
 	position: fixed;
 	cursor: pointer;
-	bottom: 100px;
+	bottom: 120px;
 	z-index: 5;
     right: 60px;
 	max-width: 380px;
@@ -600,19 +599,44 @@ h4 {
 .ele-shw.show-ele{
 	display: block
 }
-.chat-close-icn, .chat-icn-img {
+
+.chat-icn:after {
+    content: '';
+    position: absolute;
+    display: block;
+    background: #fff;
+    width: 35px;
+    height: 35px;
+    top: 26px;
+    left: 23px;
+    transform: rotate(98deg);
+}
+.chat-icn-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    z-index: 9;
+}
+.chat-icn-img {
     position: absolute;
     left: 0;
     right: 0;
     text-align: center;
     margin: 0 auto;
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
+    top: 20%;
     color: #000;
     font-size: 1.2rem;
     font-weight: bold;
 }
-.chat-icn-img{
-	width: 15px;
-    height: 15px;
+.chat-close-icn{
+	    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: 0 auto;
+    top: 33%;
+    color: #000;
+    font-size: 2rem;
+    font-weight: bold;
+    z-index: 9;
 }
